@@ -15,28 +15,20 @@
     --purple: #7C3AED; --purple-light: #EDE9FE;
   }
   body { font-family: 'Noto Sans KR', sans-serif; background: var(--gray-bg); color: var(--navy); min-height: 100vh; }
-
-  /* HEADER */
   .header { background: var(--navy); color: var(--white); padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 12px rgba(27,42,74,0.18); }
   .header-left h1 { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
   .header-left p { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 3px; font-weight: 300; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
   .header-badge { background: var(--mint); color: var(--navy); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
-
-  /* LAYOUT */
+  .sync-status { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; background: #FFF3CD; color: #D97706; }
+  .sync-status.ok { background: #D1FAE5; color: #059669; }
+  .sync-status.err { background: #FECACA; color: #DC2626; }
   .container { max-width: 1100px; margin: 0 auto; padding: 20px 16px; display: grid; grid-template-columns: 260px 1fr; gap: 16px; }
-
-  /* PANEL */
   .panel { background: var(--white); border-radius: 12px; border: 1px solid var(--gray-line); overflow: hidden; }
   .panel-header { background: var(--navy); color: var(--white); padding: 12px 16px; font-size: 13px; font-weight: 700; }
   .panel-body { padding: 12px; }
-
-  /* MEMBER GRID — 3열 */
   .member-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
-  .member-item {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    padding: 8px 4px; border-radius: 8px; cursor: pointer; border: 2px solid transparent;
-    transition: all 0.15s; background: var(--gray-bg); text-align: center; gap: 3px; min-height: 52px;
-  }
+  .member-item { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px 4px; border-radius: 8px; cursor: pointer; border: 2px solid transparent; transition: all 0.15s; background: var(--gray-bg); text-align: center; gap: 3px; min-height: 52px; }
   .member-item:hover { background: var(--mint-light); border-color: var(--mint); }
   .member-item.selected { background: var(--mint-light); border-color: var(--mint); }
   .member-item.has-vacation { background: #EEF2FF; border-color: #A5B4FC; }
@@ -45,11 +37,7 @@
   .member-days { font-size: 10px; font-weight: 700; color: var(--gray-text); background: var(--gray-line); padding: 1px 6px; border-radius: 8px; }
   .member-days.active { color: #4F46E5; background: #EEF2FF; }
   .member-days.enough { color: #059669; background: #D1FAE5; }
-
-  /* RIGHT */
   .right-col { display: flex; flex-direction: column; gap: 14px; }
-
-  /* SUMMARY */
   .summary-bar { background: var(--white); border: 1px solid var(--gray-line); border-radius: 12px; padding: 14px 18px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
   .stat-item { display: flex; flex-direction: column; gap: 2px; }
   .stat-label { font-size: 10px; color: var(--gray-text); }
@@ -59,12 +47,8 @@
   .stat-divider { width: 1px; height: 32px; background: var(--gray-line); }
   .notice-bar { margin-left: auto; background: var(--orange-light); border: 1px solid #FFCCBC; border-radius: 8px; padding: 7px 12px; font-size: 11px; color: var(--orange); font-weight: 600; display: none; }
   .notice-bar.show { display: block; }
-
-  /* RESTRICT NOTICE */
   .restrict-bar { background: var(--purple-light); border: 1px solid #C4B5FD; border-radius: 10px; padding: 10px 14px; font-size: 11px; color: var(--purple); font-weight: 500; line-height: 1.7; }
   .restrict-bar strong { font-weight: 700; }
-
-  /* INPUT FORM */
   .input-form { background: var(--white); border: 1px solid var(--gray-line); border-radius: 12px; overflow: hidden; }
   .form-header { background: var(--navy-light); color: var(--white); padding: 12px 16px; font-size: 13px; font-weight: 700; }
   .selected-name { color: var(--mint); margin-left: 6px; }
@@ -80,8 +64,6 @@
   .form-hint.warn { color: var(--orange); font-weight: 600; }
   .form-hint.ok { color: #059669; font-weight: 600; }
   .no-selected { color: var(--gray-text); font-size: 13px; padding: 16px; text-align: center; }
-
-  /* CALENDAR */
   .calendar-wrap { background: var(--white); border: 1px solid var(--gray-line); border-radius: 12px; overflow: hidden; }
   .cal-header { background: var(--navy); color: var(--white); padding: 12px 18px; font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
   .cal-body { padding: 14px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -90,71 +72,34 @@
   .cal-dow { font-size: 9px; font-weight: 700; color: var(--gray-text); text-align: center; padding: 3px 0; }
   .cal-dow.sun { color: #EF4444; }
   .cal-dow.sat { color: #3B82F6; }
-
-  /* 이름 표시를 위해 aspect-ratio 제거, min-height 확보 */
-  .cal-day {
-    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
-    padding: 3px 1px 2px; border-radius: 5px; position: relative;
-    background: transparent; transition: background 0.1s; cursor: default;
-    min-height: 52px; overflow: visible;
-  }
+  .cal-day { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; padding: 3px 1px 2px; border-radius: 5px; position: relative; background: transparent; transition: background 0.1s; cursor: default; min-height: 52px; }
   .cal-day.empty { background: transparent; min-height: 52px; }
   .cal-day.weekend-sun .day-num { color: #EF4444; }
   .cal-day.weekend-sat .day-num { color: #3B82F6; }
   .cal-day.holiday { background: #FFF1F2; }
   .cal-day.holiday .day-num { color: #EF4444; }
-
-  /* 휴가제한 — 공휴일이 겹칠 수 있으므로 holiday 클래스는 별도 유지 */
-  .cal-day.restricted {
-    background: repeating-linear-gradient(45deg, #F3F0FF, #F3F0FF 3px, #EDE9FE 3px, #EDE9FE 6px) !important;
-  }
+  .cal-day.restricted { background: repeating-linear-gradient(45deg, #F3F0FF, #F3F0FF 3px, #EDE9FE 3px, #EDE9FE 6px) !important; }
   .cal-day.restricted .day-num { color: var(--purple); }
-  /* 제한기간 내 공휴일(8/17)은 빨간 날짜 색 유지 */
   .cal-day.restricted.holiday-in-restrict .day-num { color: #EF4444; }
-
   .day-num { font-size: 10px; font-weight: 600; line-height: 1; z-index: 1; }
   .day-sub-label { font-size: 6.5px; font-weight: 700; line-height: 1; margin-top: 1px; z-index: 1; }
   .day-count { font-size: 8px; font-weight: 800; line-height: 1; margin-top: 1px; z-index: 1; }
-
-  /* 이름 목록 */
-  .day-names {
-    display: flex; flex-direction: column; align-items: center; gap: 0.5px;
-    margin-top: 1px; z-index: 1; width: 100%;
-  }
-  .day-name-tag {
-    font-size: 6px; font-weight: 600; line-height: 1.2;
-    color: #1B2A4A; background: rgba(255,255,255,0.75);
-    border-radius: 2px; padding: 0 2px;
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    max-width: 100%;
-  }
+  .day-names { display: flex; flex-direction: column; align-items: center; gap: 0.5px; margin-top: 1px; z-index: 1; width: 100%; }
+  .day-name-tag { font-size: 6px; font-weight: 600; line-height: 1.2; color: #1B2A4A; background: rgba(255,255,255,0.75); border-radius: 2px; padding: 0 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
   .day-name-tag.is-me { background: var(--mint); color: var(--navy); }
-
-  .cal-day::before {
-    content: ''; position: absolute; inset: 0; border-radius: 5px; opacity: 0; transition: opacity 0.2s;
-  }
+  .cal-day::before { content: ''; position: absolute; inset: 0; border-radius: 5px; opacity: 0; transition: opacity 0.2s; }
   .cal-day.count-1::before { background: #D1FAE5; opacity: 1; }
   .cal-day.count-2::before { background: #A7F3D0; opacity: 1; }
   .cal-day.count-3::before { background: #FFF3CD; opacity: 1; }
   .cal-day.count-over::before { background: #FECACA; opacity: 1; }
   .cal-day.restricted::before { opacity: 0 !important; }
-
   .cal-day.count-1 .day-count { color: #059669; }
   .cal-day.count-2 .day-count { color: #047857; }
   .cal-day.count-3 .day-count { color: #D97706; }
   .cal-day.count-over .day-count { color: #DC2626; }
-
   .cal-day.selected-me::after { content: ''; position: absolute; inset: 0; border-radius: 5px; border: 2px solid var(--mint); pointer-events: none; z-index: 2; }
-
-  .cal-day .tooltip {
-    display: none; position: absolute; top: calc(100% + 4px); left: 50%;
-    transform: translateX(-50%); background: var(--navy); color: var(--white);
-    font-size: 10px; padding: 5px 8px; border-radius: 6px;
-    white-space: nowrap; z-index: 200; pointer-events: none; line-height: 1.5;
-  }
+  .cal-day .tooltip { display: none; position: absolute; top: calc(100% + 4px); left: 50%; transform: translateX(-50%); background: var(--navy); color: var(--white); font-size: 10px; padding: 5px 8px; border-radius: 6px; white-space: nowrap; z-index: 200; pointer-events: none; line-height: 1.5; }
   .cal-day:hover .tooltip { display: block; }
-
-  /* LOG */
   .log-wrap { background: var(--white); border: 1px solid var(--gray-line); border-radius: 12px; overflow: hidden; }
   .log-header { background: var(--navy-light); color: var(--white); padding: 12px 16px; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; }
   .log-list { max-height: 200px; overflow-y: auto; }
@@ -168,7 +113,6 @@
   .btn-del { background: none; border: none; cursor: pointer; color: var(--gray-text); font-size: 14px; padding: 2px 5px; border-radius: 4px; transition: all 0.1s; }
   .btn-del:hover { background: var(--orange-light); color: var(--orange); }
   .log-empty { text-align: center; color: var(--gray-text); font-size: 12px; padding: 20px; }
-
   @media (max-width: 700px) {
     .container { grid-template-columns: 1fr; }
     .cal-body { grid-template-columns: 1fr; }
@@ -182,20 +126,20 @@
     <h1>인사행정처 하계휴가 조율표</h1>
     <p>2026년 7~8월 · 동시 휴가 최대 3명 권고 · 5일 이상 권장(휴일 포함)</p>
   </div>
-  <div class="header-badge">SUMMER 2026</div>
+  <div class="header-right">
+    <div class="sync-status" id="syncStatus">연결 중...</div>
+    <div class="header-badge">SUMMER 2026</div>
+  </div>
 </div>
 
 <div class="container">
   <div class="panel">
     <div class="panel-header">전체 인원 <span style="font-weight:300;color:rgba(255,255,255,0.55);font-size:11px;margin-left:4px">탭하여 선택</span></div>
-    <div class="panel-body">
-      <div class="member-grid" id="memberGrid"></div>
-    </div>
+    <div class="panel-body"><div class="member-grid" id="memberGrid"></div></div>
   </div>
-
   <div class="right-col">
     <div class="summary-bar">
-      <div class="stat-item"><div class="stat-label">전체 인원</div><div class="stat-value" id="statTotal">0</div></div>
+      <div class="stat-item"><div class="stat-label">전체 인원</div><div class="stat-value" id="statTotal">18</div></div>
       <div class="stat-divider"></div>
       <div class="stat-item"><div class="stat-label">휴가 등록</div><div class="stat-value mint" id="statReg">0</div></div>
       <div class="stat-divider"></div>
@@ -204,30 +148,23 @@
       <div class="stat-item"><div class="stat-label">겹침 과다 날짜</div><div class="stat-value orange" id="statOver">0일</div></div>
       <div class="notice-bar" id="noticeBar">⚠ 동시 3명 초과 날짜 있음</div>
     </div>
-
     <div class="restrict-bar">
       <strong>휴가 제한 기간</strong> &nbsp;|&nbsp;
       🟣 <strong>8/11~14</strong> UFS CMX &nbsp;·&nbsp;
       🟣 <strong>8/17~21</strong> UFS 1부
-      <br>
-      <span style="color:#9061F9;font-size:10px">위 기간은 달력에 빗금으로 표시됩니다. 해당 기간 휴가 등록 시 주의하세요.</span>
+      <br><span style="color:#9061F9;font-size:10px">위 기간은 달력에 빗금으로 표시됩니다. 해당 기간 휴가 등록 시 주의하세요.</span>
     </div>
-
     <div class="input-form">
       <div class="form-header">휴가 등록 <span class="selected-name" id="selectedNameDisp">— 인원을 선택해주세요</span></div>
       <div id="formContent"><div class="no-selected">이름을 탭하면 휴가 일정을 입력할 수 있습니다.</div></div>
     </div>
-
     <div class="calendar-wrap">
       <div class="cal-header">
         <span>📅</span> 달력 현황
-        <span style="font-size:10px;font-weight:400;color:rgba(255,255,255,0.5);margin-left:auto">
-          🟩 1명 &nbsp; 🟨 2명 &nbsp; 🟧 3명(한도) &nbsp; 🟥 초과 &nbsp; 🟪 제한
-        </span>
+        <span style="font-size:10px;font-weight:400;color:rgba(255,255,255,0.5);margin-left:auto">🟩 1명 &nbsp; 🟨 2명 &nbsp; 🟧 3명(한도) &nbsp; 🟥 초과 &nbsp; 🟪 제한</span>
       </div>
       <div class="cal-body" id="calBody"></div>
     </div>
-
     <div class="log-wrap">
       <div class="log-header">
         등록된 휴가 목록
@@ -239,26 +176,19 @@
 </div>
 
 <script>
+// ── 상수 ──
 const MEMBERS = [
   '인행처장님','최영현','박준우','박가현','김지우','이태희','김성배',
   '서호수','강동일','장한슬','문강령','최준규','정승원','김숙경',
   '정원해','박근동','이숙임','이지연'
 ];
 const MAX_CONCURRENT = 3;
-const MIN_DAYS = 5;  // 달력 총일수 기준 (주말·공휴일 포함)
+const MIN_DAYS = 5;
 const YEAR = 2026;
+const HOLIDAYS = new Set(['2026-07-17','2026-08-15','2026-08-17']);
 
-// 공휴일
-const HOLIDAYS = new Set([
-  '2026-07-17', // 제헌절
-  '2026-08-15', // 광복절
-  '2026-08-17', // 대체공휴일 (광복절)
-]);
-
-// 휴가 제한 기간
 function isRestricted(ds) {
-  return (ds >= '2026-08-11' && ds <= '2026-08-14') ||
-         (ds >= '2026-08-17' && ds <= '2026-08-21');
+  return (ds >= '2026-08-11' && ds <= '2026-08-14') || (ds >= '2026-08-17' && ds <= '2026-08-21');
 }
 function restrictLabel(ds) {
   if (ds >= '2026-08-11' && ds <= '2026-08-14') return 'CMX';
@@ -266,52 +196,47 @@ function restrictLabel(ds) {
   return '';
 }
 
+// ── 상태 ──
 let selectedMember = null;
-let vacations = {};
-MEMBERS.forEach(m => vacations[m] = []);
+let vacations = {}; // { key: {name, start, end} }
+let dbRef = null;   // Firebase ref (로드 후 할당)
 
 // ── UTILS ──
 function parseDate(s) { return new Date(s + 'T00:00:00'); }
 function fmtDate(d) {
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
-function diffDays(a, b) {
-  return Math.round((parseDate(b) - parseDate(a)) / 86400000) + 1;
-}
-// 근무일(주말·공휴일 제외) — 표시용
+function diffDays(a, b) { return Math.round((parseDate(b) - parseDate(a)) / 86400000) + 1; }
 function countWorkdays(start, end) {
-  let cnt = 0;
-  let d = parseDate(start);
+  let cnt = 0, d = parseDate(start);
   const e = parseDate(end);
   while (d <= e) {
-    const dow = d.getDay();
-    const ds = fmtDate(d);
+    const dow = d.getDay(), ds = fmtDate(d);
     if (dow !== 0 && dow !== 6 && !HOLIDAYS.has(ds)) cnt++;
     d.setDate(d.getDate()+1);
   }
   return cnt;
 }
-// 달력 총일수(주말·공휴일 포함) — 5일 권장 체크용
-function totalCalDays(name) {
-  return vacations[name].reduce((s, v) => s + diffDays(v.start, v.end), 0);
+function getVacsByName(name) {
+  return Object.entries(vacations).filter(([,v]) => v.name === name);
 }
-// 근무일 합산 — 표시용
+function totalCalDays(name) {
+  return getVacsByName(name).reduce((s,[,v]) => s + diffDays(v.start, v.end), 0);
+}
 function totalWorkdays(name) {
-  return vacations[name].reduce((s, v) => s + countWorkdays(v.start, v.end), 0);
+  return getVacsByName(name).reduce((s,[,v]) => s + countWorkdays(v.start, v.end), 0);
 }
 function buildHeatmap() {
   const map = {};
-  MEMBERS.forEach(name => {
-    vacations[name].forEach(v => {
-      let d = parseDate(v.start);
-      const e = parseDate(v.end);
-      while (d <= e) {
-        const ds = fmtDate(d);
-        if (!map[ds]) map[ds] = new Set();
-        map[ds].add(name);
-        d.setDate(d.getDate()+1);
-      }
-    });
+  Object.values(vacations).forEach(v => {
+    let d = parseDate(v.start);
+    const e = parseDate(v.end);
+    while (d <= e) {
+      const ds = fmtDate(d);
+      if (!map[ds]) map[ds] = new Set();
+      map[ds].add(v.name);
+      d.setDate(d.getDate()+1);
+    }
   });
   return map;
 }
@@ -322,18 +247,15 @@ function renderMembers() {
   grid.innerHTML = '';
   MEMBERS.forEach(name => {
     const cal = totalCalDays(name);
-    const hasVac = vacations[name].length > 0;
+    const hasVac = cal > 0;
     const enough = cal >= MIN_DAYS;
     const item = document.createElement('div');
-    item.className = 'member-item'
-      + (selectedMember === name ? ' selected' : '')
-      + (hasVac ? ' has-vacation' : '');
+    item.className = 'member-item' + (selectedMember===name?' selected':'') + (hasVac?' has-vacation':'');
     item.innerHTML = `
       <span class="member-name">${name}</span>
-      <span class="member-days ${hasVac ? (enough ? 'enough' : 'active') : ''}">
+      <span class="member-days ${hasVac?(enough?'enough':'active'):''}">
         ${hasVac ? cal+'일' : '미등록'}
-      </span>
-    `;
+      </span>`;
     item.onclick = () => selectMember(name);
     grid.appendChild(item);
   });
@@ -358,10 +280,9 @@ function renderForm() {
   const cal = totalCalDays(selectedMember);
   const wd = totalWorkdays(selectedMember);
   let hintClass = '', hintText = '';
-  if (cal === 0) { hintText = '5일 이상 사용 권장 (휴일 포함)'; }
+  if (cal === 0) hintText = '5일 이상 사용 권장 (휴일 포함)';
   else if (cal < MIN_DAYS) { hintClass = 'warn'; hintText = `현재 ${cal}일 · 5일 이상 권장 (근무일 ${wd}일)`; }
   else { hintClass = 'ok'; hintText = `현재 ${cal}일 ✓ (근무일 ${wd}일)`; }
-
   content.innerHTML = `
     <div class="form-body">
       <div class="form-group">
@@ -372,10 +293,10 @@ function renderForm() {
         <label>휴가 종료</label>
         <input type="date" id="inputEnd" min="2026-07-01" max="2026-08-31">
       </div>
-      <button class="btn btn-mint" onclick="addVacation()">등록</button>
+      <button class="btn btn-mint" id="addBtn">등록</button>
       <div class="form-hint ${hintClass}">${hintText}</div>
-    </div>
-  `;
+    </div>`;
+  document.getElementById('addBtn').onclick = addVacation;
 }
 
 function addVacation() {
@@ -384,61 +305,56 @@ function addVacation() {
   if (!s || !e) { alert('시작일과 종료일을 모두 입력해주세요.'); return; }
   if (s > e) { alert('종료일은 시작일 이후여야 합니다.'); return; }
   if (s < '2026-07-01' || e > '2026-08-31') { alert('7월~8월 내의 날짜만 입력 가능합니다.'); return; }
+  let d = parseDate(s), ed = parseDate(e), hasRestrict = false;
+  while (d <= ed) { if (isRestricted(fmtDate(d))) { hasRestrict = true; break; } d.setDate(d.getDate()+1); }
+  if (hasRestrict && !confirm('선택한 기간에 휴가 제한 기간(UFS CMX/1부)이 포함되어 있습니다.\n그래도 등록하시겠습니까?')) return;
 
-  let d = parseDate(s);
-  const ed = parseDate(e);
-  let hasRestrict = false;
-  while (d <= ed) {
-    if (isRestricted(fmtDate(d))) { hasRestrict = true; break; }
-    d.setDate(d.getDate()+1);
+  const entry = { name: selectedMember, start: s, end: e };
+  if (dbRef) {
+    // Firebase 사용 가능 시 push
+    dbRef.push(entry);
+  } else {
+    // 오프라인 fallback
+    const key = 'local_' + Date.now();
+    vacations[key] = entry;
+    renderAll();
   }
-  if (hasRestrict) {
-    const ok = confirm('선택한 기간에 휴가 제한 기간(UFS CMX/1부)이 포함되어 있습니다.\n그래도 등록하시겠습니까?');
-    if (!ok) return;
-  }
-
-  vacations[selectedMember].push({ start: s, end: e });
-  renderAll();
 }
 
-function deleteVacation(name, idx) {
-  vacations[name].splice(idx, 1);
-  renderAll();
+function deleteVacation(key) {
+  if (dbRef) {
+    dbRef.child(key).remove();
+  } else {
+    delete vacations[key];
+    renderAll();
+  }
 }
+window.deleteVacation = deleteVacation;
 
 function renderCalendar() {
   const heatmap = buildHeatmap();
   const body = document.getElementById('calBody');
   body.innerHTML = '';
-
   [7, 8].forEach(month => {
     const block = document.createElement('div');
     block.className = 'month-block';
-
     const title = document.createElement('div');
     title.className = 'month-title';
     title.textContent = `${YEAR}년 ${month}월`;
     block.appendChild(title);
-
     const grid = document.createElement('div');
     grid.className = 'cal-grid';
-
     ['일','월','화','수','목','금','토'].forEach((d, i) => {
       const el = document.createElement('div');
       el.className = 'cal-dow ' + (i===0?'sun':i===6?'sat':'');
       el.textContent = d;
       grid.appendChild(el);
     });
-
     const firstDay = new Date(YEAR, month-1, 1).getDay();
     const daysInMonth = new Date(YEAR, month, 0).getDate();
-
     for (let i = 0; i < firstDay; i++) {
-      const el = document.createElement('div');
-      el.className = 'cal-day empty';
-      grid.appendChild(el);
+      const el = document.createElement('div'); el.className = 'cal-day empty'; grid.appendChild(el);
     }
-
     for (let d = 1; d <= daysInMonth; d++) {
       const ds = `${YEAR}-${String(month).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
       const dow = new Date(YEAR, month-1, d).getDay();
@@ -446,7 +362,6 @@ function renderCalendar() {
       const isRest = isRestricted(ds);
       const people = heatmap[ds] ? [...heatmap[ds]] : [];
       const cnt = people.length;
-
       let cls = 'cal-day';
       if (isRest) {
         cls += ' restricted';
@@ -461,41 +376,28 @@ function renderCalendar() {
         else if (cnt > 3) cls += ' count-over';
       }
       if (selectedMember && people.includes(selectedMember)) cls += ' selected-me';
-
       const rl = restrictLabel(ds);
-
-      // 공휴일 레이블 (제한기간 여부 관계없이)
       let holText = '';
       if (isHoliday) {
-        if (ds === '2026-07-17') holText = '제헌';
-        else if (ds === '2026-08-15') holText = '광복';
-        else if (ds === '2026-08-17') holText = '대체';
+        if (ds==='2026-07-17') holText='제헌';
+        else if (ds==='2026-08-15') holText='광복';
+        else if (ds==='2026-08-17') holText='대체';
       }
-
-      // 서브 레이블: 공휴일 우선, 그 다음 제한라벨
-      let subLabel = '';
-      if (holText) {
-        const color = '#EF4444';
-        subLabel = `<span class="day-sub-label" style="color:${color}">${holText}</span>`;
-      } else if (rl) {
-        subLabel = `<span class="day-sub-label" style="color:var(--purple)">${rl}</span>`;
-      }
-
-      // 이름 목록
+      let subLabel = holText
+        ? `<span class="day-sub-label" style="color:#EF4444">${holText}</span>`
+        : rl ? `<span class="day-sub-label" style="color:var(--purple)">${rl}</span>` : '';
       let namesHtml = '';
       if (people.length > 0) {
-        const tags = people.map(p => {
-          const isMe = selectedMember && p === selectedMember;
-          return `<span class="day-name-tag${isMe ? ' is-me' : ''}">${p}</span>`;
-        }).join('');
+        const tags = people.map(p =>
+          `<span class="day-name-tag${selectedMember&&p===selectedMember?' is-me':''}">${p}</span>`
+        ).join('');
         namesHtml = `<div class="day-names">${tags}</div>`;
       }
-
-      const tooltipPeople = people.length > 0 ? people.join(', ') : '';
-      const tooltipRestrict = isRest ? `[제한: UFS ${rl}]` : '';
-      const tooltipHol = isHoliday ? `[공휴일]` : '';
-      const tooltipAll = [tooltipHol, tooltipRestrict, tooltipPeople].filter(Boolean).join(' ');
-
+      const tooltipAll = [
+        isHoliday?'[공휴일]':'',
+        isRest?`[제한: UFS ${rl}]`:'',
+        people.join(', ')
+      ].filter(Boolean).join(' ');
       const el = document.createElement('div');
       el.className = cls;
       el.innerHTML = `
@@ -503,8 +405,7 @@ function renderCalendar() {
         ${subLabel}
         ${cnt > 0 ? `<span class="day-count">${cnt}명</span>` : ''}
         ${namesHtml}
-        ${tooltipAll ? `<div class="tooltip">${tooltipAll}</div>` : ''}
-      `;
+        ${tooltipAll ? `<div class="tooltip">${tooltipAll}</div>` : ''}`;
       grid.appendChild(el);
     }
     block.appendChild(grid);
@@ -515,40 +416,31 @@ function renderCalendar() {
 function renderLog() {
   const list = document.getElementById('logList');
   const countEl = document.getElementById('logCount');
-  let rows = [];
-  MEMBERS.forEach(name => {
-    vacations[name].forEach((v, idx) => rows.push({ name, v, idx }));
-  });
+  const rows = Object.entries(vacations).sort((a,b) => MEMBERS.indexOf(a[1].name) - MEMBERS.indexOf(b[1].name));
   countEl.textContent = rows.length;
-  if (rows.length === 0) {
-    list.innerHTML = '<div class="log-empty">등록된 휴가가 없습니다.</div>';
-    return;
-  }
-  list.innerHTML = rows.map(({ name, v, idx }) => {
+  if (rows.length === 0) { list.innerHTML = '<div class="log-empty">등록된 휴가가 없습니다.</div>'; return; }
+  list.innerHTML = rows.map(([key, v]) => {
     const cal = diffDays(v.start, v.end);
     const wd = countWorkdays(v.start, v.end);
-    const total = totalCalDays(name);
+    const total = totalCalDays(v.name);
     const enough = total >= MIN_DAYS;
     return `
       <div class="log-item">
-        <span class="log-name">${name}</span>
+        <span class="log-name">${v.name}</span>
         <span class="log-range">${v.start.slice(5)} ~ ${v.end.slice(5)}</span>
         <span class="log-days">${cal}일(근무 ${wd}일)</span>
-        <span class="${enough ? 'log-ok' : 'log-warn'}">${enough ? '✓' : '부족'}</span>
-        <button class="btn-del" onclick="deleteVacation('${name}',${idx})">✕</button>
-      </div>
-    `;
+        <span class="${enough?'log-ok':'log-warn'}">${enough?'✓':'부족'}</span>
+        <button class="btn-del" onclick="deleteVacation('${key}')">✕</button>
+      </div>`;
   }).join('');
 }
 
 function renderSummary() {
   const heatmap = buildHeatmap();
-  const registered = MEMBERS.filter(m => vacations[m].length > 0).length;
+  const registered = MEMBERS.filter(m => totalCalDays(m) > 0).length;
   const enough = MEMBERS.filter(m => totalCalDays(m) >= MIN_DAYS).length;
   let overDays = 0;
   Object.values(heatmap).forEach(set => { if (set.size > MAX_CONCURRENT) overDays++; });
-
-  document.getElementById('statTotal').textContent = MEMBERS.length;
   document.getElementById('statReg').textContent = registered;
   document.getElementById('statEnough').textContent = enough;
   document.getElementById('statOver').textContent = overDays + '일';
@@ -564,7 +456,55 @@ function renderAll() {
   renderSummary();
 }
 
+// 초기 렌더 (Firebase 로드 전에도 UI 표시)
 renderAll();
+
+// ── Firebase 동적 로드 ──
+const syncEl = document.getElementById('syncStatus');
+(async () => {
+  try {
+    const { initializeApp } = await import('https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js');
+    const { getDatabase, ref, onValue, push, remove, child } = await import('https://www.gstatic.com/firebasejs/9.23.0/firebase-database.js');
+
+    const app = initializeApp({
+      apiKey: "AIzaSyB9i6Z__7cTTZkOD39dnLgUU7dLX3FXMEQ",
+      authDomain: "vacation-planner-22dcf.firebaseapp.com",
+      databaseURL: "https://vacation-planner-22dcf-default-rtdb.firebaseio.com",
+      projectId: "vacation-planner-22dcf",
+      storageBucket: "vacation-planner-22dcf.firebasestorage.app",
+      messagingSenderId: "295250234879",
+      appId: "1:295250234879:web:044ed4cc884ea1df1d2bca"
+    });
+
+    const database = getDatabase(app);
+    const vacationsRef = ref(database, 'vacations');
+
+    // ref를 전역에 노출해 addVacation/deleteVacation에서 사용
+    dbRef = {
+      push: (data) => push(vacationsRef, data),
+      child: (key) => ({ remove: () => remove(ref(database, 'vacations/' + key)) })
+    };
+    // deleteVacation 재정의
+    window.deleteVacation = (key) => remove(ref(database, 'vacations/' + key));
+
+    onValue(vacationsRef, (snapshot) => {
+      vacations = {};
+      if (snapshot.exists()) {
+        snapshot.forEach(child => { vacations[child.key] = child.val(); });
+      }
+      syncEl.textContent = '실시간 동기화 중';
+      syncEl.className = 'sync-status ok';
+      renderAll();
+    }, () => {
+      syncEl.textContent = '연결 오류';
+      syncEl.className = 'sync-status err';
+    });
+
+  } catch(e) {
+    syncEl.textContent = '오프라인 모드';
+    syncEl.className = 'sync-status err';
+  }
+})();
 </script>
 </body>
 </html>
